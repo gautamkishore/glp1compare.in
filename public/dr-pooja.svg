@@ -1,0 +1,17 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="240" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E" />
+      <stop offset="1" stop-color="#115E59" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="32" fill="url(#bg)"/>
+  <circle cx="120" cy="93" r="40" fill="#F8C7A2"/>
+  <path d="M63 218C68 169 88 145 120 145C152 145 172 169 177 218" fill="#F8FAFC"/>
+  <path d="M80 82C80 56 98 40 120 40C142 40 160 56 160 82V89H80V82Z" fill="#1E293B"/>
+  <circle cx="107" cy="94" r="4" fill="#0F172A"/>
+  <circle cx="133" cy="94" r="4" fill="#0F172A"/>
+  <path d="M105 111C110 118 130 118 135 111" stroke="#B45309" stroke-width="4" stroke-linecap="round"/>
+  <rect x="95" y="154" width="50" height="24" rx="12" fill="#E2E8F0"/>
+  <text x="120" y="170" font-family="Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#0F172A">MD</text>
+</svg>
