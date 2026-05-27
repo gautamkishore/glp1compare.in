@@ -33,6 +33,7 @@ export function CostCalculator({ molecules, hiddenCosts }: CostCalculatorProps) 
     formatOptions.find((format) => format.id === selectedFormatId) ?? formatOptions[0];
 
   const medicationMonthlyCost = selectedFormat?.monthlyCost ?? 0;
+  const isInvestigational = selectedMolecule?.isInvestigational ?? false;
   const medicationTotalCost = medicationMonthlyCost * durationMonths;
 
   const unsupervisedBuffer = 1700;
@@ -70,6 +71,7 @@ export function CostCalculator({ molecules, hiddenCosts }: CostCalculatorProps) 
             {molecules.map((molecule) => (
               <option key={molecule.id} value={molecule.id}>
                 {molecule.name}
+                {molecule.isInvestigational ? " (Trial only)" : ""}
               </option>
             ))}
           </select>
@@ -81,6 +83,7 @@ export function CostCalculator({ molecules, hiddenCosts }: CostCalculatorProps) 
             className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-slate-900 outline-none transition-all duration-200 focus:border-teal-600 focus:ring-2 focus:ring-teal-200"
             value={selectedFormat?.id ?? "vial"}
             onChange={(event) => setSelectedFormatId(event.target.value)}
+            disabled={isInvestigational}
           >
             {formatOptions.map((format) => (
               <option key={format.id} value={format.id}>
@@ -113,21 +116,23 @@ export function CostCalculator({ molecules, hiddenCosts }: CostCalculatorProps) 
         <article className="rounded-2xl border border-teal-200 bg-teal-50 p-5">
           <p className="text-sm text-teal-900">Monthly medication cost</p>
           <p className="mt-2 text-2xl font-semibold text-teal-950">
-            ₹{medicationMonthlyCost.toLocaleString("en-IN")}
+            {isInvestigational ? "N/A" : `₹${medicationMonthlyCost.toLocaleString("en-IN")}`}
           </p>
         </article>
 
         <article className="rounded-2xl border border-slate-200 bg-white p-5">
           <p className="text-sm text-slate-600">Total for {durationMonths} months</p>
           <p className="mt-2 text-2xl font-semibold text-slate-900">
-            ₹{medicationTotalCost.toLocaleString("en-IN")}
+            {isInvestigational ? "N/A" : `₹${medicationTotalCost.toLocaleString("en-IN")}`}
           </p>
         </article>
 
         <article className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
           <p className="text-sm text-amber-900">WW GLP-1 Care comparison</p>
           <p className="mt-2 text-lg font-semibold text-amber-950">
-            {wwDelta > 0
+            {isInvestigational
+              ? "Benchmark deferred until commercial pricing is available"
+              : wwDelta > 0
               ? `Medication-only is ₹${wwDelta.toLocaleString("en-IN")} lower`
               : `WW GLP-1 Care is ₹${Math.abs(wwDelta).toLocaleString("en-IN")} lower`}
           </p>
@@ -140,8 +145,9 @@ export function CostCalculator({ molecules, hiddenCosts }: CostCalculatorProps) 
       <div className="mt-6 rounded-2xl border border-rose-200 bg-rose-50 p-5">
         <p className="text-sm font-semibold text-rose-900">Hidden costs of unsupervised use</p>
         <p className="mt-1 text-sm text-rose-800">
-          Medication-only plans often miss follow-up expenses. True monthly exposure estimate: ₹
-          {trueMonthlyEstimate.toLocaleString("en-IN")}/mo.
+          {isInvestigational
+            ? "For investigational molecules, direct retail costing is not possible. Use trial availability and safety oversight as your primary decision factors."
+            : `Medication-only plans often miss follow-up expenses. True monthly exposure estimate: ₹${trueMonthlyEstimate.toLocaleString("en-IN")}/mo.`}
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {hiddenCosts.map((cost) => (

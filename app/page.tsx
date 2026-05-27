@@ -19,35 +19,67 @@ import {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Compare GLP-1 India 2026: Brands, Prices & Cost Calculator",
+    absolute: "GLP-1 India 2026: Semaglutide vs Tirzepatide vs Retatrutide",
   },
   description:
-    "Compare semaglutide, liraglutide, and tirzepatide in India with molecule tables, generic brand filters, and an instant GLP-1 cost calculator.",
+    "Compare semaglutide, liraglutide, tirzepatide, and retatrutide (investigational) in India with molecule tables, brand filters, and a GLP-1 cost calculator.",
   alternates: {
     canonical: SITE_URL,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
   keywords: [
-    "semaglutide vs liraglutide",
+    "semaglutide vs tirzepatide",
+    "retatrutide India",
+    "retatrutide trial status",
     "best generic GLP-1 brand India",
     "GLP-1 cost India",
     "GLP-1 comparison tool",
     "semaglutide price India",
   ],
+  authors: [{ name: "GLP-1 Compare Research Desk" }],
+  category: "Health",
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Compare GLP-1 India 2026: Brands, Prices & Cost Calculator",
+    locale: "en_IN",
+    title: "GLP-1 India 2026: Semaglutide vs Tirzepatide vs Retatrutide",
     description:
-      "Tool-first GLP-1 comparison for India: molecule data, generic brands, and instant cost math.",
+      "India-focused GLP-1 comparison with molecule profiles, brand pricing filters, and retatrutide trial-only status.",
     siteName: "GLP-1 Compare",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "GLP-1 Compare India 2026",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compare GLP-1 India 2026: Brands, Prices & Cost Calculator",
+    title: "GLP-1 India 2026: Semaglutide vs Tirzepatide vs Retatrutide",
     description:
-      "Side-by-side molecule data, India generic brand filters, and live GLP-1 cost calculator.",
+      "Compare leading GLP-1 options for India, including retatrutide trial-stage data.",
+    images: ["/twitter-image"],
   },
 };
+
+const LAST_UPDATED_ISO = "2026-05-27";
+const RETATRUTIDE_RESEARCH_URLS = [
+  "https://www.nejm.org/doi/abs/10.1056/NEJMoa2301972",
+  "https://investor.lilly.com/news-releases/news-release-details/lillys-triple-agonist-retatrutide-delivered-powerful-weight-loss",
+  "https://www.lilly.com/news/stories/what-to-know-about-retatrutide",
+];
 
 const medicalWebPageJsonLd = {
   "@context": "https://schema.org",
@@ -55,19 +87,19 @@ const medicalWebPageJsonLd = {
   name: "GLP-1 Compare",
   url: SITE_URL,
   inLanguage: "en-IN",
-  about: [
-    "Semaglutide",
-    "Liraglutide",
-    "Tirzepatide",
+  headline: "GLP-1 Medication Comparison for India (2026)",
+  about: MOLECULES.map((molecule) => molecule.name).concat([
     "GLP-1 costs in India",
     "Generic brand comparison",
-  ],
+  ]),
   specialty: "Endocrinology",
+  isAccessibleForFree: true,
   audience: {
     "@type": "MedicalAudience",
     audienceType: "Patients researching GLP-1 options in India",
   },
-  dateModified: "2026-05-13",
+  dateModified: LAST_UPDATED_ISO,
+  citation: RETATRUTIDE_RESEARCH_URLS,
 };
 
 const faqPageJsonLd = {
@@ -99,6 +131,28 @@ const organizationJsonLd = {
   ],
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "GLP-1 Compare",
+  url: SITE_URL,
+  inLanguage: "en-IN",
+};
+
+const moleculeItemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "GLP-1 molecules compared",
+  itemListElement: MOLECULES.map((molecule, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: molecule.name,
+    description: molecule.isInvestigational
+      ? `${molecule.name} is listed as investigational and trial-only as of ${LAST_UPDATED_ISO}.`
+      : `${molecule.name}: ${molecule.weightLoss} expected loss range with ${molecule.dosing.toLowerCase()} dosing.`,
+  })),
+};
+
 const fearToneClass: Record<(typeof FEAR_STATS)[number]["tone"], string> = {
   rose: "border-rose-200 bg-rose-50 text-rose-900",
   amber: "border-amber-200 bg-amber-50 text-amber-900",
@@ -106,6 +160,14 @@ const fearToneClass: Record<(typeof FEAR_STATS)[number]["tone"], string> = {
 };
 
 export default function Home() {
+  const commerciallyAvailableMolecules = MOLECULES.filter((molecule) => !molecule.isInvestigational);
+  const commercialMonthlyCosts = commerciallyAvailableMolecules.flatMap((molecule) =>
+    molecule.formats.map((format) => format.monthlyCost),
+  );
+  const minCommercialCost = Math.min(...commercialMonthlyCosts);
+  const maxCommercialCost = Math.max(...commercialMonthlyCosts);
+  const compactCostRange = `₹${(minCommercialCost / 1000).toFixed(1)}K-₹${(maxCommercialCost / 1000).toFixed(1)}K/mo`;
+
   return (
     <>
       <script
@@ -119,6 +181,14 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(moleculeItemListJsonLd) }}
       />
 
       <div className="relative">
@@ -161,8 +231,8 @@ export default function Home() {
                 </h1>
                 <p className="max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
                   Built for high-intent searches like <strong>semaglutide vs liraglutide</strong>,
-                  <strong> best generic brand India</strong>, and <strong>GLP-1 cost</strong>.
-                  Start with tools first, then connect on WhatsApp.
+                  <strong> retatrutide India status</strong>, <strong>best generic brand India</strong>,
+                  and <strong>GLP-1 cost</strong>. Start with tools first, then connect on WhatsApp.
                 </p>
 
                 <div className="flex flex-wrap gap-2">
@@ -186,15 +256,15 @@ export default function Home() {
                 <dl className="mt-3 grid grid-cols-2 gap-3 text-sm">
                   <div className="rounded-lg bg-white p-3">
                     <dt className="text-slate-500">Molecules compared</dt>
-                    <dd className="mt-1 font-semibold text-slate-900">3</dd>
+                    <dd className="mt-1 font-semibold text-slate-900">{MOLECULES.length}</dd>
                   </div>
                   <div className="rounded-lg bg-white p-3">
                     <dt className="text-slate-500">Brands indexed</dt>
-                    <dd className="mt-1 font-semibold text-slate-900">10</dd>
+                    <dd className="mt-1 font-semibold text-slate-900">{GENERIC_BRANDS.length}</dd>
                   </div>
                   <div className="rounded-lg bg-white p-3">
                     <dt className="text-slate-500">Cost range</dt>
-                    <dd className="mt-1 font-semibold text-slate-900">₹1.6K-₹12.5K/mo</dd>
+                    <dd className="mt-1 font-semibold text-slate-900">{compactCostRange}</dd>
                   </div>
                   <div className="rounded-lg bg-white p-3">
                     <dt className="text-slate-500">Output mode</dt>

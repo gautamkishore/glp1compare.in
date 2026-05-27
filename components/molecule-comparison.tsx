@@ -12,6 +12,8 @@ type ViewMode = "table" | "cards";
 
 export function MoleculeComparison({ molecules }: MoleculeComparisonProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("table");
+  const moleculeHeading = molecules.map((molecule) => molecule.name).join(" vs ");
+  const hasInvestigationalMolecule = molecules.some((molecule) => molecule.isInvestigational);
 
   return (
     <section
@@ -28,8 +30,13 @@ export function MoleculeComparison({ molecules }: MoleculeComparisonProps) {
             id="molecule-heading"
             className="mt-2 text-2xl font-semibold text-slate-900"
           >
-            Semaglutide vs Liraglutide vs Tirzepatide
+            {moleculeHeading}
           </h2>
+          {hasInvestigationalMolecule ? (
+            <p className="mt-2 text-xs text-slate-600">
+              Includes investigational molecules that are not commercially available yet.
+            </p>
+          ) : null}
         </div>
 
         <div
@@ -83,6 +90,9 @@ export function MoleculeComparison({ molecules }: MoleculeComparisonProps) {
             <tbody>
               {molecules.map((molecule, index) => {
                 const isBestValue = molecule.badge === "Best Value";
+                const badgeClassName = isBestValue
+                  ? "bg-teal-100 text-teal-800"
+                  : "bg-amber-100 text-amber-900";
 
                 return (
                   <tr
@@ -94,8 +104,10 @@ export function MoleculeComparison({ molecules }: MoleculeComparisonProps) {
                     <td className="px-4 py-4 align-top font-semibold text-slate-900">
                       <div className="flex items-center gap-2">
                         <span>{molecule.name}</span>
-                        {isBestValue ? (
-                          <span className="rounded-full bg-teal-100 px-2 py-1 text-xs font-semibold text-teal-800">
+                        {molecule.badge ? (
+                          <span
+                            className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeClassName}`}
+                          >
                             {molecule.badge}
                           </span>
                         ) : null}
@@ -126,7 +138,7 @@ export function MoleculeComparison({ molecules }: MoleculeComparisonProps) {
           </table>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {molecules.map((molecule) => {
             const isBestValue = molecule.badge === "Best Value";
 

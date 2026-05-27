@@ -1,4 +1,8 @@
-export type MoleculeId = "semaglutide" | "liraglutide" | "tirzepatide";
+export type MoleculeId =
+  | "semaglutide"
+  | "liraglutide"
+  | "tirzepatide"
+  | "retatrutide";
 export type FormatId = "vial" | "pen";
 
 export interface MoleculeFormat {
@@ -11,6 +15,7 @@ export interface MoleculeProfile {
   id: MoleculeId;
   name: string;
   badge?: string;
+  isInvestigational?: boolean;
   dosing: string;
   weightLoss: string;
   costRange: string;
@@ -95,6 +100,23 @@ export const MOLECULES: MoleculeProfile[] = [
     formats: [
       { id: "vial", label: "Vial", monthlyCost: 5600 },
       { id: "pen", label: "Pen", monthlyCost: 8200 },
+    ],
+  },
+  {
+    id: "retatrutide",
+    name: "Retatrutide",
+    badge: "Research Watch",
+    isInvestigational: true,
+    dosing: "Weekly (investigational titration in trials)",
+    weightLoss: "~24.2% (Phase 2, 48w) to ~28.3% (Phase 3 topline, 80w)",
+    costRange: "No retail price (investigational, May 2026)",
+    availability: "Not approved for public retail use; clinical-trial access only",
+    patent: "Investigational triple-agonist under active global Phase 3 development",
+    muscleRisk:
+      "Long-term real-world body-composition data pending; GI side effects are dose-dependent in trials",
+    formats: [
+      { id: "vial", label: "Vial", monthlyCost: 0 },
+      { id: "pen", label: "Pen", monthlyCost: 0 },
     ],
   },
 ];
@@ -290,6 +312,11 @@ export const FAQ_ITEMS: FaqItem[] = [
     question: "Is tirzepatide worth paying more than semaglutide?",
     answer:
       "For some users, tirzepatide may drive stronger loss outcomes, but cost and availability are much higher. Compare 6-12 month total cost and adherence feasibility before choosing.",
+  },
+  {
+    question: "Is retatrutide available in India right now?",
+    answer:
+      "As of May 2026, retatrutide is still investigational and not approved for public retail use. Legitimate access is through regulated clinical trials only.",
   },
   {
     question: "What does WW GLP-1 Care include?",

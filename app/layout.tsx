@@ -21,12 +21,15 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "GLP-1 Compare",
+    default: "GLP-1 Compare India",
     template: "%s | GLP-1 Compare",
   },
   description:
-    "Neutral GLP-1 molecule, brand, and cost comparison for India with instant tool-first calculators.",
+    "Neutral GLP-1 molecule, brand, and cost comparison for India, including investigational retatrutide status.",
   applicationName: "GLP-1 Compare",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
@@ -63,4 +66,3 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </html>
   );
 }
-
