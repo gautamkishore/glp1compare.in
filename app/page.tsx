@@ -547,8 +547,9 @@ export default function Home() {
                 <p className="font-semibold text-slate-800 mb-2">Resources</p>
                 <ul className="space-y-1.5 text-slate-600">
                   <li><a href="#molecule-comparison" className="hover:text-teal-700 transition-colors">Molecule Comparison</a></li>
-                  <li><a href="#generic-brands" className="hover:text-teal-700 transition-colors">Generic Brand Prices</a></li>
-                  <li><a href="#cost-calculator" className="hover:text-teal-700 transition-colors">Cost Calculator</a></li>
+                  <li><a href="/semaglutide-vs-tirzepatide" className="hover:text-teal-700 transition-colors font-medium">⚖️ Semaglutide vs Tirzepatide</a></li>
+                  <li><a href="/oral-vs-injectable-semaglutide" className="hover:text-teal-700 transition-colors font-medium">💊 Oral vs Injectable</a></li>
+                  <li><a href="/retatrutide-trials-india" className="hover:text-teal-700 transition-colors font-medium">🔬 Retatrutide Status</a></li>
                 </ul>
               </div>
               <div>
