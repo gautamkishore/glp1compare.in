@@ -382,8 +382,8 @@ export default function Home() {
                 <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                   <div className="flex items-start gap-3">
                     <Image
-                      src="/dr-pooja.svg"
-                      alt="Dr. Pooja"
+                      src="/dr-pooja-singh.jpg"
+                      alt="Dr. Pooja Singh, Clinical Advisor"
                       width={64}
                       height={64}
                       className="h-16 w-16 rounded-xl object-cover"
