@@ -341,20 +341,36 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody>
-                    {METHODS_COMPARISON.map((row, index) => (
-                      <tr
-                        key={row.method}
-                        className={`${
-                          index % 2 === 0 ? "bg-teal-50/30" : "bg-white"
-                        } ${row.highlighted ? "ring-1 ring-inset ring-teal-300" : ""}`}
-                      >
-                        <td className="px-4 py-4 font-semibold text-slate-900">{row.method}</td>
-                        <td className="px-4 py-4 text-slate-700">{row.typicalCost}</td>
-                        <td className="px-4 py-4 text-slate-700">{row.expectedLoss}</td>
-                        <td className="px-4 py-4 text-slate-700">{row.monitoring}</td>
-                        <td className="px-4 py-4 text-slate-700">{row.downside}</td>
-                      </tr>
-                    ))}
+                    {METHODS_COMPARISON.map((row, index) => {
+                      const isWWPlus = row.method.includes("WeightWonder Plus");
+                      const isWWGlp1 = row.method.includes("GLP-1 Layer");
+                      return (
+                        <tr
+                          key={row.method}
+                          className={`${
+                            isWWPlus
+                              ? "bg-teal-50 ring-2 ring-inset ring-teal-400"
+                              : isWWGlp1
+                              ? "bg-emerald-50/60 ring-1 ring-inset ring-emerald-300"
+                              : index % 2 === 0 ? "bg-teal-50/30" : "bg-white"
+                          }`}
+                        >
+                          <td className="px-4 py-4 font-semibold text-slate-900">
+                            {isWWPlus && (
+                              <span className="mr-2 inline-block rounded-full bg-teal-600 px-2 py-0.5 text-xs font-bold text-white">Best</span>
+                            )}
+                            {isWWGlp1 && (
+                              <span className="mr-2 inline-block rounded-full bg-emerald-500 px-2 py-0.5 text-xs font-bold text-white">✦ Enhanced</span>
+                            )}
+                            {row.method}
+                          </td>
+                          <td className="px-4 py-4 text-slate-700">{row.typicalCost}</td>
+                          <td className={`px-4 py-4 font-medium ${isWWPlus || isWWGlp1 ? "text-teal-800" : "text-slate-700"}`}>{row.expectedLoss}</td>
+                          <td className={`px-4 py-4 ${isWWPlus || isWWGlp1 ? "text-teal-800 font-medium" : "text-slate-700"}`}>{row.monitoring}</td>
+                          <td className="px-4 py-4 text-slate-700">{row.downside}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
