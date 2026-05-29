@@ -27,8 +27,28 @@ export const metadata: Metadata = {
   description:
     "Neutral GLP-1 molecule, brand, and cost comparison for India, including investigational retatrutide status.",
   applicationName: "GLP-1 Compare",
+  keywords: [
+    "GLP-1 compare India",
+    "semaglutide vs tirzepatide India",
+    "generic semaglutide brands India",
+    "GLP-1 cost calculator India",
+    "Obeda Semanat Noveltreat comparison",
+    "retatrutide India status",
+    "best generic GLP-1 India 2026",
+  ],
   alternates: {
     canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+      'max-snippet': -1,
+    },
   },
 };
 

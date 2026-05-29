@@ -118,8 +118,14 @@ const faqPageJsonLd = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "GLP-1 Compare",
+  name: "WeightWonder",
   url: SITE_URL,
+  sameAs: [
+    "https://glp1-india.com",
+    "https://semaglutideindia.top",
+    "https://weightwonder.in",
+    "https://wa.me/918878199499",
+  ],
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -233,6 +239,10 @@ export default function Home() {
                   Built for high-intent searches like <strong>semaglutide vs liraglutide</strong>,
                   <strong> retatrutide India status</strong>, <strong>best generic brand India</strong>,
                   and <strong>GLP-1 cost</strong>. Start with tools first, then connect on WhatsApp.
+                </p>
+                <p className="text-xs text-slate-500">
+                  New to GLP-1 therapy?{' '}
+                  <a href="https://glp1-india.com" target="_blank" rel="noopener noreferrer" className="text-teal-700 underline hover:text-teal-900">Read our complete beginners guide →</a>
                 </p>
 
                 <div className="flex flex-wrap gap-2">
@@ -416,6 +426,16 @@ export default function Home() {
               <p className="mt-2 text-base font-medium text-amber-900 sm:text-lg">
                 If you are comparing options this week, act before dosage-support queues reset.
               </p>
+              <div className="mt-4">
+                <a
+                  href="https://semaglutideindia.top"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-xl bg-teal-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-teal-800"
+                >
+                  Ready to Start? Get Supervised Treatment →
+                </a>
+              </div>
             </section>
 
             <section className="rounded-3xl border border-teal-200 bg-gradient-to-r from-teal-900 to-teal-700 p-6 text-white shadow-xl shadow-teal-900/25 sm:p-8">
@@ -444,9 +464,35 @@ export default function Home() {
         </main>
 
         <footer className="border-t border-teal-100 bg-white/80">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-slate-600 sm:px-6 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 GLP-1 Compare. Neutral research and comparison tool for India.</p>
-            <p>Powered by WeightWonder research collaboration.</p>
+          <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
+            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3 text-sm">
+              <div>
+                <p className="font-semibold text-slate-800 mb-2">GLP-1 India Research Network</p>
+                <ul className="space-y-1.5">
+                  <li><a href="https://glp1-india.com" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 transition-colors">📚 GLP-1 India — Complete Guide</a></li>
+                  <li><a href="https://semaglutideindia.top" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 transition-colors">💊 Start Supervised Treatment</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-slate-800 mb-2">Resources</p>
+                <ul className="space-y-1.5 text-slate-600">
+                  <li><a href="#molecule-comparison" className="hover:text-teal-700 transition-colors">Molecule Comparison</a></li>
+                  <li><a href="#generic-brands" className="hover:text-teal-700 transition-colors">Generic Brand Prices</a></li>
+                  <li><a href="#cost-calculator" className="hover:text-teal-700 transition-colors">Cost Calculator</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-slate-800 mb-2">Contact</p>
+                <ul className="space-y-1.5 text-slate-600">
+                  <li><a href="https://wa.me/918878199499?text=Hi%2C%20comparing%20GLP-1%20options.%20Found%20you%20on%20GLP1Compare.in.%20Can%20you%20help%20me%20choose%3F" target="_blank" rel="noopener noreferrer" className="hover:text-teal-700 transition-colors">💬 WhatsApp Expert</a></li>
+                  <li><a href="mailto:glp1@einsteinaura.com" className="hover:text-teal-700 transition-colors">✉ glp1@einsteinaura.com</a></li>
+                </ul>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 border-t border-teal-100 pt-6 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-600">
+              <p>© 2026 GLP-1 Compare. Neutral research and comparison tool for India.</p>
+              <p>Powered by <a href="https://weightwonder.in" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 transition-colors font-medium">WeightWonder</a> research collaboration.</p>
+            </div>
           </div>
         </footer>
       </div>
